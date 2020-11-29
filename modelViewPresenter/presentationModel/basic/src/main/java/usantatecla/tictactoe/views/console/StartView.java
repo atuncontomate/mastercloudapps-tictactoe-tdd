@@ -22,4 +22,8 @@ class StartView {
 		new GameView(startController).write();
 	}
 
+	void interact(StartController startController) {
+
+	}
+
 }
