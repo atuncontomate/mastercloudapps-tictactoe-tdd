@@ -28,7 +28,16 @@ class PlayView {
     }
 
     void interact(PlayController playController) {
-
+        do {
+            if (!playController.isBoardComplete()) {
+                this.put();
+            } else {
+                this.move();
+            }
+            new GameView(playController).write();
+        } while (!playController.isTicTacToe());
+        new TokenView(playController.getToken()).write();
+        Message.PLAYER_WIN.writeln();
     }
 
     private void put() {
