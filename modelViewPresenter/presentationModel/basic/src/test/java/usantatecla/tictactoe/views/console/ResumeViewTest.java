@@ -63,4 +63,16 @@ public class ResumeViewTest {
             assertThat(this.resumeView.interact(resumeController), is(false));
         }
     }
+
+    // TDD-07
+    @Test
+    void testGivenNewGameIsTrueWhenInteractWithPassedControllerThenIsTrue() {
+        ResumeController resumeController = mock(ResumeController.class);
+        try (MockedStatic console = mockStatic(Console.class)) {
+            when(this.console.readChar(anyString())).thenReturn('y');
+            resumeController.resume();
+            console.when(Console::getInstance).thenReturn(this.console);
+            assertThat(this.resumeView.interact(resumeController), is(true));
+        }
+    }
 }
