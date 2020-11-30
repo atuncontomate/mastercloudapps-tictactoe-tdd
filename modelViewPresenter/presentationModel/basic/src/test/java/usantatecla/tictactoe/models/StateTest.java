@@ -35,4 +35,13 @@ public class StateTest {
         state.next();
         assertThat(state.getValueState(), is(StateValue.RESUME));
     }
+
+    // TDD-11
+    @Test
+    public void whenStateIsCreatedAndGoToTheNextThreeTimesThenStateValueShouldBeResume(){
+        state.next();
+        state.next();
+        state.next();
+        assertThat(state.getValueState(), is(StateValue.EXIT));
+    }
 }
