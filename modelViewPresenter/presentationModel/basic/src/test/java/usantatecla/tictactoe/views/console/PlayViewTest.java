@@ -126,5 +126,24 @@ public class PlayViewTest {
         }
     }
 
+    // TDD-03
+    @Test
+    void whenMachinePlayerPutCoordinateThenInteractWithPassedControllerShouldPutCoordinate() {
+        PlayController playController = mock(PlayController.class);
+        try (MockedStatic console = mockStatic(Console.class)) {
+            Coordinate coordinate = new Coordinate(0, 0);
+            when(playController.isBoardComplete()).thenReturn(false);
+            when(playController.isUser()).thenReturn(false);
+            when(this.playView.createRandomCoordinate()).thenReturn(coordinate);
+            when(playController.put(any(Coordinate.class))).thenReturn(Error.NULL);
+            when(playController.getToken(any(Coordinate.class))).thenReturn(Token.X);
+            when(playController.isTicTacToe()).thenReturn(true);
+            when(playController.getToken()).thenReturn(Token.X);
+            console.when(Console::getInstance).thenReturn(this.console);
+            this.playView.interact(playController);
+            verify(playController).put(coordinate);
+            verify(this.console).writeln(Message.PLAYER_WIN.toString());
+        }
+    }
 
 }
