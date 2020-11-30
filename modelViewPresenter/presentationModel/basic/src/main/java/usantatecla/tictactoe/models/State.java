@@ -5,7 +5,7 @@ public class State {
     private StateValue stateValue;
 
     public State(){
-        this.stateValue = StateValue.INITIAL;
+        this.reset();
     }
 
     public StateValue getValueState() {
