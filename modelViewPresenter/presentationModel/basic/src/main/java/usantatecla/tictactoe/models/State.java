@@ -2,8 +2,7 @@ package usantatecla.tictactoe.models;
 
 public class State {
 
-
-    public Object getValueState() {
-        return null;
+    public StateValue getValueState() {
+        return StateValue.INITIAL;
     }
 }
