@@ -45,4 +45,11 @@ public class StateTest {
         assertThat(state.getValueState(), is(StateValue.EXIT));
     }
 
+    // TDD-12
+    @Test
+    public void whenStateIsCreatedAndGoToTheNextAndResetThenStateValueShouldBeInitial(){
+        state.next();
+        state.reset();
+        assertThat(state.getValueState(), is(StateValue.INITIAL));
+    }
 }
