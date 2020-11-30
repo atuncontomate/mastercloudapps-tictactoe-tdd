@@ -14,8 +14,7 @@ import usantatecla.utils.Console;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
@@ -51,6 +50,17 @@ public class ResumeViewTest {
             this.resumeController.resume();
             console.when(Console::getInstance).thenReturn(this.console);
             assertThat(this.resumeView.interact(), is(true));
+        }
+    }
+
+    // TDD-06
+    @Test
+    void testGivenNewGameIsFalseWhenInteractWithPassedControllerThenIsFalse() {
+        ResumeController resumeController = mock(ResumeController.class);
+        try (MockedStatic console = mockStatic(Console.class)) {
+            when(this.console.readChar(anyString())).thenReturn('n');
+            console.when(Console::getInstance).thenReturn(this.console);
+            assertThat(this.resumeView.interact(resumeController), is(false));
         }
     }
 }
