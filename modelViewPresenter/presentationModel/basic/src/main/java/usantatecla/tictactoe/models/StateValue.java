@@ -1,5 +1,6 @@
 package usantatecla.tictactoe.models;
 
 public enum StateValue {
-    INITIAL
+    INITIAL,
+    IN_GAME
 }

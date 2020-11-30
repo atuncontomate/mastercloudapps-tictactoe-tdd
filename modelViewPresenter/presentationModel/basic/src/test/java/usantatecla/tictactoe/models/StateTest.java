@@ -13,4 +13,12 @@ public class StateTest {
         State state = new State();
         assertThat(state.getValueState(), is(StateValue.INITIAL));
     }
+
+    // TDD-09
+    @Test
+    public void whenStateIsCreatedAndGoToTheNextThenStateValueShouldBeInGame(){
+        State state = new State();
+        state.next();
+        assertThat(state.getValueState(), is(StateValue.IN_GAME));
+    }
 }
