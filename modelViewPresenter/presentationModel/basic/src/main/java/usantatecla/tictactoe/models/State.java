@@ -13,6 +13,6 @@ public class State {
     }
 
     public void next() {
-        this.stateValue = StateValue.IN_GAME;
+        this.stateValue = StateValue.values()[this.stateValue.ordinal() + 1];
     }
 }
