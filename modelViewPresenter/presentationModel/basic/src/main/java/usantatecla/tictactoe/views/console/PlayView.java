@@ -22,7 +22,7 @@ class PlayView {
             if (!playController.isBoardComplete()) {
                 this.put(playController);
             } else {
-                this.move();
+                this.move(playController);
             }
             new GameView(playController).write();
         } while (!playController.isTicTacToe());
