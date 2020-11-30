@@ -38,10 +38,11 @@ public class StateTest {
 
     // TDD-11
     @Test
-    public void whenStateIsCreatedAndGoToTheNextThreeTimesThenStateValueShouldBeResume(){
+    public void whenStateIsCreatedAndGoToTheNextThreeTimesThenStateValueShouldBeExit(){
         state.next();
         state.next();
         state.next();
         assertThat(state.getValueState(), is(StateValue.EXIT));
     }
+
 }
