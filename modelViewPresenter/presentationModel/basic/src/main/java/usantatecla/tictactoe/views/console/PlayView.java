@@ -7,7 +7,7 @@ import usantatecla.tictactoe.types.Error;
 
 class PlayView {
 
-    private final PlayController playController;
+    private PlayController playController;
 
     PlayView(PlayController playController) {
         this.playController = playController;
@@ -22,7 +22,7 @@ class PlayView {
             if (!playController.isBoardComplete()) {
                 this.put(playController);
             } else {
-                this.move(playController);
+                this.move();
             }
             new GameView(playController).write();
         } while (!playController.isTicTacToe());
@@ -41,6 +41,26 @@ class PlayView {
                 coordinate = createRandomCoordinate();
             }
             error = playController.put(coordinate);
+            if (isUser) {
+                new ErrorView(error).writeln();
+            }
+        } while (!error.isNull());
+    }
+
+    private void move() {
+        boolean isUser = this.playController.isUser();
+        Coordinate origin;
+        Coordinate target;
+        Error error;
+        do {
+            if (isUser) {
+                origin = new CoordinateView().read(Message.COORDINATE_TO_REMOVE.toString());
+                target = new CoordinateView().read(Message.COORDINATE_TO_MOVE.toString());
+            } else {
+                origin = createRandomCoordinate();
+                target = createRandomCoordinate();
+            }
+            error = this.playController.move(origin, target);
             if (isUser) {
                 new ErrorView(error).writeln();
             }
