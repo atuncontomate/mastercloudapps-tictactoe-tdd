@@ -17,6 +17,6 @@ public class State {
     }
 
     public void reset() {
-
+        this.stateValue = StateValue.INITIAL;
     }
 }
