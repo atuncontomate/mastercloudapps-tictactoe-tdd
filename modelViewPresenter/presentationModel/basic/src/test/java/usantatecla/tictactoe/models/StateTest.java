@@ -27,4 +27,12 @@ public class StateTest {
         state.next();
         assertThat(state.getValueState(), is(StateValue.IN_GAME));
     }
+
+    // TDD-10
+    @Test
+    public void whenStateIsCreatedAndGoToTheNextTwiceThenStateValueShouldBeResume(){
+        state.next();
+        state.next();
+        assertThat(state.getValueState(), is(StateValue.RESUME));
+    }
 }
