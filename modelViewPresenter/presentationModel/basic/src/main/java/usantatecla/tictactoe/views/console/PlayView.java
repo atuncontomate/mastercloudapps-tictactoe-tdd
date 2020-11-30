@@ -30,23 +30,6 @@ class PlayView {
         Message.PLAYER_WIN.writeln();
     }
 
-    private void put() {
-        boolean isUser = this.playController.isUser();
-        Coordinate coordinate;
-        Error error;
-        do {
-            if (isUser) {
-                coordinate = new CoordinateView().read(Message.COORDINATE_TO_PUT.toString());
-            } else {
-                coordinate = createRandomCoordinate();
-            }
-            error = this.playController.put(coordinate);
-            if (isUser) {
-                new ErrorView(error).writeln();
-            }
-        } while (!error.isNull());
-    }
-
     private void put(PlayController playController){
         boolean isUser = playController.isUser();
         Coordinate coordinate;
