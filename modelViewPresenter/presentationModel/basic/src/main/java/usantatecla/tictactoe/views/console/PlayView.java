@@ -27,6 +27,10 @@ class PlayView {
         Message.PLAYER_WIN.writeln();
     }
 
+    void interact(PlayController playController) {
+
+    }
+
     private void put() {
         boolean isUser = this.playController.isUser();
         Coordinate coordinate;
