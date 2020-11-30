@@ -20,7 +20,7 @@ class PlayView {
     void interact(PlayController playController) {
         do {
             if (!playController.isBoardComplete()) {
-                this.put();
+                this.put(playController);
             } else {
                 this.move();
             }
@@ -41,6 +41,23 @@ class PlayView {
                 coordinate = createRandomCoordinate();
             }
             error = this.playController.put(coordinate);
+            if (isUser) {
+                new ErrorView(error).writeln();
+            }
+        } while (!error.isNull());
+    }
+
+    private void put(PlayController playController){
+        boolean isUser = playController.isUser();
+        Coordinate coordinate;
+        Error error;
+        do {
+            if (isUser) {
+                coordinate = new CoordinateView().read(Message.COORDINATE_TO_PUT.toString());
+            } else {
+                coordinate = createRandomCoordinate();
+            }
+            error = playController.put(coordinate);
             if (isUser) {
                 new ErrorView(error).writeln();
             }
