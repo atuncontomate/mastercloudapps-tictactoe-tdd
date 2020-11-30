@@ -146,4 +146,23 @@ public class PlayViewTest {
         }
     }
 
+    // TDD-04
+    @Test
+    void whenUserPlayerMoveOriginToTargetThenInteractWithPassedControllerShouldMoveOriginToTarget() {
+        PlayController playController = mock(PlayController.class);
+        try (MockedStatic console = mockStatic(Console.class)) {
+            when(playController.isBoardComplete()).thenReturn(true);
+            when(playController.isUser()).thenReturn(true);
+            when(this.console.readInt(anyString())).thenReturn(1, 1, 2, 2);
+            when(playController.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
+            when(playController.getToken(any(Coordinate.class))).thenReturn(Token.X);
+            when(playController.isTicTacToe()).thenReturn(true);
+            when(playController.getToken()).thenReturn(Token.X);
+            console.when(Console::getInstance).thenReturn(this.console);
+            this.playView.interact(playController);
+            verify(playController).move(new Coordinate(0, 0), new Coordinate(1, 1));
+            verify(this.console).writeln(Message.PLAYER_WIN.toString());
+        }
+    }
+
 }
