@@ -50,4 +50,13 @@ public class PlayControllerTest {
         verify(this.state, never()).next();
     }
 
+    // TDD-17
+    @Test
+    public void whenMoveCoordinateAndIsTicTacToeThenStateShouldGoToTheNext(){
+        Coordinate coordinate = new Coordinate();
+        when(this.game.move(coordinate, coordinate)).thenReturn(Error.NULL);
+        when(this.game.isTicTacToe()).thenReturn(true);
+        playController.move(coordinate, coordinate);
+        verify(this.state).next();
+    }
 }
