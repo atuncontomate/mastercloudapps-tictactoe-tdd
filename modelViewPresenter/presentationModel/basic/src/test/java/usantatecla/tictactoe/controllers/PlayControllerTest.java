@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.State;
+import usantatecla.tictactoe.types.Error;
 
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
@@ -34,7 +35,7 @@ public class PlayControllerTest {
     @Test
     public void whenPutCoordinateAndIsTicTacToeThenStateShouldGoToTheNext(){
         Coordinate coordinate = new Coordinate();
-        when(this.game.put(coordinate)).thenReturn(null);
+        when(this.game.put(coordinate)).thenReturn(Error.NULL);
         when(this.game.isTicTacToe()).thenReturn(true);
         playController.put(coordinate);
         verify(this.state).next();
@@ -44,7 +45,7 @@ public class PlayControllerTest {
     @Test
     public void whenPutCoordinateAndIsNotTicTacToeThenStateShouldStay(){
         Coordinate coordinate = new Coordinate();
-        when(this.game.put(coordinate)).thenReturn(null);
+        when(this.game.put(coordinate)).thenReturn(Error.NULL);
         playController.put(coordinate);
         verify(this.state, never()).next();
     }

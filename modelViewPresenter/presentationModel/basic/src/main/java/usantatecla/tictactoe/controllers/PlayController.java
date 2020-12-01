@@ -37,7 +37,9 @@ public class PlayController extends Controller {
 
 	public Error put(Coordinate coordinate) {
 		Error error = this.game.put(coordinate);
-		this.state.next();
+		if (error.isNull() && this.game.isTicTacToe()) {
+			this.state.next();
+		}
 		return error;
 	}
 
