@@ -17,6 +17,8 @@ import static org.mockito.MockitoAnnotations.openMocks;
 @ExtendWith(MockitoExtension.class)
 public class PlayControllerTest {
 
+    private Coordinate coordinate;
+
     @Mock
     private State state;
 
@@ -28,13 +30,13 @@ public class PlayControllerTest {
 
     @BeforeEach
     void before() {
+        coordinate = new Coordinate();
         openMocks(this);
     }
 
     // TDD-15
     @Test
     public void whenPutCoordinateAndIsTicTacToeThenStateShouldGoToTheNext(){
-        Coordinate coordinate = new Coordinate();
         when(this.game.put(coordinate)).thenReturn(Error.NULL);
         when(this.game.isTicTacToe()).thenReturn(true);
         playController.put(coordinate);
@@ -44,7 +46,6 @@ public class PlayControllerTest {
     // TDD-16
     @Test
     public void whenPutCoordinateAndIsNotTicTacToeThenStateShouldStay(){
-        Coordinate coordinate = new Coordinate();
         when(this.game.put(coordinate)).thenReturn(Error.NULL);
         playController.put(coordinate);
         verify(this.state, never()).next();
@@ -53,7 +54,6 @@ public class PlayControllerTest {
     // TDD-17
     @Test
     public void whenMoveCoordinateAndIsTicTacToeThenStateShouldGoToTheNext(){
-        Coordinate coordinate = new Coordinate();
         when(this.game.move(coordinate, coordinate)).thenReturn(Error.NULL);
         when(this.game.isTicTacToe()).thenReturn(true);
         playController.move(coordinate, coordinate);
@@ -63,7 +63,6 @@ public class PlayControllerTest {
     // TDD-18
     @Test
     public void whenMoveCoordinateAndIsNotTicTacToeThenStateShouldStay(){
-        Coordinate coordinate = new Coordinate();
         when(this.game.move(coordinate, coordinate)).thenReturn(Error.NULL);
         playController.move(coordinate, coordinate);
         verify(this.state, never()).next();
