@@ -44,7 +44,11 @@ public class PlayController extends Controller {
 	}
 
 	public Error move(Coordinate origin, Coordinate target) {
-		return this.game.move(origin, target);
+		Error error = this.game.move(origin, target);
+		if (error.isNull() && this.game.isTicTacToe()) {
+			this.state.next();
+		}
+		return error;
 	}
 
 }
