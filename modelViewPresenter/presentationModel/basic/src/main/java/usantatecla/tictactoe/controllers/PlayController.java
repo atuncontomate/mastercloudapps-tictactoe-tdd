@@ -1,14 +1,22 @@
 package usantatecla.tictactoe.controllers;
 
 import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.models.State;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.Token;
 
 public class PlayController extends Controller {
 
+	private State state;
+
 	public PlayController(Game game) {
 		super(game);
+	}
+
+	public PlayController(Game game, State state) {
+		super(game);
+		this.state = state;
 	}
 
 	public boolean isBoardComplete() {
@@ -28,7 +36,9 @@ public class PlayController extends Controller {
 	}
 
 	public Error put(Coordinate coordinate) {
-		return this.game.put(coordinate);
+		Error error = this.game.put(coordinate);
+		this.state.next();
+		return error;
 	}
 
 	public Error move(Coordinate origin, Coordinate target) {
