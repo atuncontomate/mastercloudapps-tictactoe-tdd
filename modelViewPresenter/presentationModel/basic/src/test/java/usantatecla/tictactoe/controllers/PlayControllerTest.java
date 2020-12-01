@@ -59,4 +59,13 @@ public class PlayControllerTest {
         playController.move(coordinate, coordinate);
         verify(this.state).next();
     }
+
+    // TDD-18
+    @Test
+    public void whenMoveCoordinateAndIsNotTicTacToeThenStateShouldStay(){
+        Coordinate coordinate = new Coordinate();
+        when(this.game.move(coordinate, coordinate)).thenReturn(Error.NULL);
+        playController.move(coordinate, coordinate);
+        verify(this.state, never()).next();
+    }
 }
